@@ -1,4 +1,4 @@
-package com.blueteam.official.service.product;
+package com.blueteam.official.service;
 
 import com.blueteam.official.model.Product;
 import com.blueteam.official.service.IGeneralService;

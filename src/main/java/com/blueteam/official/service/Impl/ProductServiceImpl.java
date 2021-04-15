@@ -1,7 +1,8 @@
-package com.blueteam.official.service.product;
+package com.blueteam.official.service.Impl;
 
 import com.blueteam.official.model.Product;
 import com.blueteam.official.repository.IProductRepository;
+import com.blueteam.official.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
