@@ -40,4 +40,9 @@ public class CategoryServiceImpl implements ICategoryService {
     public Page<Category> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public Page<Category> findAllCategoryByNameUsingQuery(String name, Pageable pageable) {
+        return categoryRepository.findAllCategoryByNameUsingQuery(name, pageable);
+    }
 }
