@@ -2,17 +2,17 @@ package com.blueteam.official.controller.admin;
 
 import com.blueteam.official.model.Category;
 import com.blueteam.official.model.Product;
+import com.blueteam.official.model.ProductForm;
 import com.blueteam.official.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import java.util.Optional;
 
 @Controller
@@ -34,5 +34,52 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("/admin/category/list");
         modelAndView.addObject("categories", categories);
         return modelAndView;
+    }
+
+    @GetMapping("/create")
+    public ModelAndView showFormCreate() {
+        ModelAndView modelAndView = new ModelAndView("/admin/category/create");
+        modelAndView.addObject("category", new Category());
+        return modelAndView;
+    }
+
+    @PostMapping("/create")
+    public ModelAndView createCategory(@ModelAttribute("category") Category category){
+        categoryService.save(category);
+        ModelAndView modelAndView = new ModelAndView("/admin/category/create");
+        return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showUpdateForm(@PathVariable Long id){
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        ModelAndView modelAndView;
+        if(categoryOptional.isPresent()){
+            modelAndView = new ModelAndView("/admin/category/edit");
+            Category category = categoryOptional.get();
+            modelAndView.addObject("category", category);
+        } else {
+            modelAndView = new ModelAndView("error-404");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView updateCategory(@ModelAttribute Category category){
+        categoryService.save(category);
+        ModelAndView modelAndView = new ModelAndView("/admin/category/edit");
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id){
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if (categoryOptional.isPresent()){
+            categoryService.remove(id);
+            return "redirect:/admin/categories/list";
+        } else {
+            return "error-404";
+        }
     }
 }
