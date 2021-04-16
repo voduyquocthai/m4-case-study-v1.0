@@ -32,7 +32,7 @@ public class CategoryController {
             categories =  categoryService.findAll(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/admin/category/list");
-        modelAndView.addObject("products", categories);
+        modelAndView.addObject("categories", categories);
         return modelAndView;
     }
 }
