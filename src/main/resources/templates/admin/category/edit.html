@@ -70,59 +70,30 @@
         <!-- Recent Order Table -->
         <div class="card card-table-border-none" id="recent-orders">
             <div class="card-header justify-content-between">
-                <h2>Product Management</h2>
+                <h2>Category Management</h2>
 
             </div>
             <div class="card-body pt-0 pb-5">
 
 
-                <form enctype="multipart/form-data" method="post" th:action="@{/admin/products/create}"
-                      th:object="${product}">
+                <form method="post" th:action="@{/admin/categories/edit}"
+                      th:object="${category}">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationServer01">Id</label>
+                        <input type="hidden" th:field="*{id}" class="form-control" id="validationServer02"
+                               placeholder="" value="Md" required>
+                    </div>
 
                     <div class="col-md-12 mb-3">
                         <label for="validationServer01">Name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="validationServer01"
                                placeholder="" value="Md" required>
-                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServer02">Price</label>
-                        <input type="number" th:field="*{price}" class="form-control" id="validationServer02"
-                               placeholder="Last name" value="Rahad" required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Color</label>
-                        <input type="text" th:field="*{color}" class="form-control" id="validationcolor" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Size</label>
-                        <input type="number" th:field="*{size}" class="form-control" id="validation" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Description</label>
-                        <input type="text" th:field="*{description}" class="form-control" id="validationServerUsername" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Image</label>
-                        <input type="file" th:field="*{imgUrl}" class="form-control" id="validation2" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Category</label>
-                        <select th:field="*{category}">
-                            <option th:each="category : ${categories}" th:text="${category.name}"
-                                    th:value="${category.id}"></option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </form>
+
+
+
             </div>
         </div>
 
