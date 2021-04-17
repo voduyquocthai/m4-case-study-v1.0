@@ -1,6 +1,8 @@
 package com.blueteam.official.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Data
 @Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +38,5 @@ public class User {
 
     @ManyToOne
     private Role role;
+
 }
