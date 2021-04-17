@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <head>
   <meta charset="utf-8" />
@@ -24,7 +24,7 @@
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="assets/css/sleek.css" />
 
-  
+
 
   <!-- FAVICON -->
   <link href="assets/img/favicon.png" rel="shortcut icon" />
@@ -44,11 +44,11 @@
   <body class="bg-light-gray" id="body">
       <div class="container d-flex flex-column justify-content-between vh-100">
       <div class="row justify-content-center mt-5">
-        <div class="col-xl-5 col-lg-6 col-md-10">
+        <div class="col-xl-10 col-lg-6 col-md-10">
           <div class="card">
             <div class="card-header bg-primary">
               <div class="app-brand">
-                <a href="/index.html">
+                <a href="/admin">
                   <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="30" height="33"
                     viewBox="0 0 30 33">
                     <g fill="none" fill-rule="evenodd">
@@ -56,20 +56,21 @@
                       <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
                     </g>
                   </svg>
-                  <span class="brand-name">Sleek Dashboard</span>
+                  <span class="brand-name">Blue Team</span>
                 </a>
               </div>
             </div>
             <div class="card-body p-5">
-
               <h4 class="text-dark mb-5">Sign In</h4>
-              <form action="/index.html">
+              <form th:action="@{/login}" method="post" th:object="${user}">
                 <div class="row">
                   <div class="form-group col-md-12 mb-4">
-                    <input type="email" class="form-control input-lg" id="email" aria-describedby="emailHelp" placeholder="Username">
+                    <input type="text" class="form-control input-lg"  th:field="*{username}" placeholder="Username">
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</p>
                   </div>
                   <div class="form-group col-md-12 ">
-                    <input type="password" class="form-control input-lg" id="password" placeholder="Password">
+                    <input type="password" class="form-control input-lg" th:field="*{password}" placeholder="Password">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</p>
                   </div>
                   <div class="col-md-12">
                     <div class="d-flex my-2 justify-content-between">
@@ -78,13 +79,14 @@
                           <input type="checkbox" />
                           <div class="control-indicator"></div>
                         </label>
-                
+
                       </div>
-                      <p><a class="text-blue" href="#">Forgot Your Password?</a></p>
+
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign In</button>
+                    <p><a class="text-blue" href="#">Forgot Your Password?</a></p>
                     <p>Don't have an account yet ?
-                      <a class="text-blue" href="sign-up.html">Sign Up</a>
+                      <a class="text-blue" href="/register">Sign Up</a>
                     </p>
                   </div>
                 </div>
