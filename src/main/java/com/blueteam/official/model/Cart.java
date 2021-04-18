@@ -18,4 +18,6 @@ public class Cart {
     private User user;
 
     private Date buyDate;
+
+
 }
