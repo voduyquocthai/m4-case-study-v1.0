@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zxx" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +26,9 @@
 </head>
 
 <body>
+
 <!-- Header Section Begin -->
+
 <div th:fragment="header">
     <!-- Page Preloder -->
     <div id="preloder">
@@ -75,8 +78,13 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a th:href="@{/user/signin}">Sign in</a>
-                                <a href="#">FAQs</a>
+                                <div >
+                                    <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+                                </div>
+                                <div sec:authorize="isAuthenticated()">
+                                    <a sec:authentication="principal.username"  th:href="@{/clients/userDetail}"></a>
+                                    <a th:href="@{/logout}">Logout</a>
+                                </div>
                             </div>
                             <div class="header__top__hover">
                                 <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -101,7 +109,7 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a th:href="@{/user/index}">Home</a></li>
+                            <li class="active"><a th:href="@{/home}">Home</a></li>
                             <li><a th:href="@{/user/shop}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -147,7 +155,8 @@
                             <a th:href="@{/user/shop}" class="primary-btn">Shop now <span
                                     class="arrow_right"></span></a>
                             <div class="hero__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.facebook.com/thong.tranminh.796/"><i class="fa fa-facebook"></i></a>
+
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
@@ -643,7 +652,9 @@
 <!-- Latest Blog Section End -->
 
 <!-- Footer Section Begin -->
-<footer class="footer">
+
+<footer class="footer" th:fragment="footer">
+
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
