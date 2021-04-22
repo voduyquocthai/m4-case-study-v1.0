@@ -101,25 +101,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a th:href="@{/user/index}"><img th:src="@{/img/logo.png}" alt=""></a>
+                        <a th:href="@{/userw/index}"><img th:src="@{/img/logo.png}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a th:href="@{/home}">Home</a></li>
-                            <li><a th:href="@{/user/shop}">Shop</a></li>
+                            <li><a th:href="@{/users/shop}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a th:href="@{/user/about}">About Us</a></li>
-                                    <li><a th:href="@{/user/shop-details}">Shop Details</a></li>
-                                    <li><a th:href="@{/user/shoppingcart}">Shopping Cart</a></li>
-                                    <li><a th:href="@{/user/checkout}">Check Out</a></li>
-                                    <li><a th:href="@{/user/blogdetail}">Blog Details</a></li>
+                                    <li><a th:href="@{/users/about}">About Us</a></li>
+                                    <li><a th:href="@{/users/shop-details}">Shop Details</a></li>
+                                    <li><a th:href="@{/cart/show/__${username}__}">Shopping Cart</a></li>
+                                    <li><a th:href="@{/users/checkout}">Check Out</a></li>
+                                    <li><a th:href="@{/users/blogdetail}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a th:href="@{/user/blog}">Blog</a></li>
-                            <li><a th:href="@{/user/contact}">Contacts</a></li>
+                            <li><a th:href="@{/users/blog}">Blog</a></li>
+                            <li><a th:href="@{/users/contact}">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -150,7 +150,7 @@
                             <h2>Fall - Winter Collections 2030</h2>
                             <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                 commitment to exceptional quality.</p>
-                            <a th:href="@{/user/shop}" class="primary-btn">Shop now <span
+                            <a th:href="@{/users/shop}" class="primary-btn">Shop now <span
                                     class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a href="https://www.facebook.com/thong.tranminh.796/"><i class="fa fa-facebook"></i></a>
@@ -172,7 +172,7 @@
                             <h2>Fall - Winter Collections 2030</h2>
                             <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                 commitment to exceptional quality.</p>
-                            <a th:href="@{/user/shop}" class="primary-btn">Shop now <span
+                            <a th:href="@{/users/shop}" class="primary-btn">Shop now <span
                                     class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -200,7 +200,7 @@
                     </div>
                     <div class="banner__item__text">
                         <h2>Clothing Collections 2030</h2>
-                        <a th:href="@{/user/shop}">Shop now</a>
+                        <a th:href="@{/users/shop}">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@
                     </div>
                     <div class="banner__item__text">
                         <h2>Shoes Spring 2030</h2>
-                        <a th:href="@{/user/shop}">Shop now</a>
+                        <a th:href="@{/users/shop}">Shop now</a>
                     </div>
                 </div>
             </div>

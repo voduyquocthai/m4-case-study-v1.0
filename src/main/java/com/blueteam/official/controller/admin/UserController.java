@@ -1,8 +1,10 @@
 package com.blueteam.official.controller.admin;
 
+import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
+import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IRoleService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +33,10 @@ public class UserController {
     @Autowired
     private IRoleService roleService;
 
-    @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\m4-case-study-v1.0\\src\\main\\resources\\static\\img\\user-avatar\\")
+    @Autowired
+    private IProductService productService;
+
+    @Value(value = "${upload.path}")
     private String uploadFile;
 
     @GetMapping("/list")
@@ -88,6 +94,17 @@ public class UserController {
     private ModelAndView changePassword(@PathVariable Long id) {
         User user = userService.findById(id).get();
         return new ModelAndView("/client/change-pass", "user", user);
+    }
+
+    @GetMapping("/shop")
+    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
+        Page<Product> products = productService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
+        modelAndView.addObject("products", products);
+        if (principal != null) {
+            modelAndView.addObject("username", principal.getName());
+        }
+        return modelAndView;
     }
 
 
