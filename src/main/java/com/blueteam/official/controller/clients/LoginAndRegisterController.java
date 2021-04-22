@@ -103,7 +103,6 @@ public class LoginAndRegisterController {
         user.setAvatarUrl(fileName);
         user.setAddress(userForm.getAddress());
         user.setPhoneNumber(userForm.getPhoneNumber());
-        user.setCart(new Cart());
         Role appRole = new Role();
         appRole.setId(1L);
         user.setRole(appRole);
