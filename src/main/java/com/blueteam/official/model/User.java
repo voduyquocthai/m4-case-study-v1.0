@@ -39,4 +39,6 @@ public class User {
     @ManyToOne
     private Role role;
 
+    public User(Long id, String username, String password, String email, String address, String phoneNumber, String filename, Role role) {
+    }
 }
