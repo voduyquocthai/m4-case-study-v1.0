@@ -50,6 +50,16 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public Page<User> findAllByKey(String key, Pageable pageable) {
+        return userRepository.findAllByKeyword(key,pageable);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.findUserByUserName(username);
         List<GrantedAuthority> authorities = new ArrayList<>();

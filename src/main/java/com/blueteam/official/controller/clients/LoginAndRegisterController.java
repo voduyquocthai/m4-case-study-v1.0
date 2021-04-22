@@ -1,5 +1,10 @@
 package com.blueteam.official.controller.clients;
 
+
+import com.blueteam.official.model.Product;
+import com.blueteam.official.model.Role;
+import com.blueteam.official.model.User;
+import com.blueteam.official.model.UserForm;
 import com.blueteam.official.model.*;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
@@ -41,7 +46,6 @@ public class LoginAndRegisterController {
     @PostMapping("/login")
     public ModelAndView login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         ModelAndView modelAndView;
-        String message = "Username or password aren't incorrect";
         if (bindingResult.hasFieldErrors()) {
             modelAndView = new ModelAndView("/client/sign-in");
             return modelAndView;
@@ -50,6 +54,7 @@ public class LoginAndRegisterController {
                 return new ModelAndView("/client/index");
             } else {
                 modelAndView = new ModelAndView("/client/sign-in");
+                String message = "Username or password aren't incorrect";
                 modelAndView.addObject("message", message);
                 return modelAndView;
             }
@@ -67,7 +72,7 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/register")
-    public ModelAndView logout() {
+    public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView("/client/sign-up");
         modelAndView.addObject("userForm", new UserForm());
         return modelAndView;
@@ -79,6 +84,10 @@ public class LoginAndRegisterController {
         if (bindingResult.hasFieldErrors()) {
             modelAndView = new ModelAndView("/client/sign-up");
             return modelAndView;
+        }
+        if (checkAccount(userForm.getUsername(),userForm.getEmail())){
+            String message = "Username or email existed!!";
+            return  new ModelAndView("/client/sign-up", "message",message);
         }
         MultipartFile multipartFile = userForm.getImage();
         String fileName = multipartFile.getOriginalFilename();
@@ -101,6 +110,15 @@ public class LoginAndRegisterController {
         userService.save(user);
         modelAndView = new ModelAndView("/client/sign-in","user",new User());
         return modelAndView;
+    }
+
+    private boolean checkAccount(String username, String email){
+        User  user = userService.findUserByUserName(username);
+        User  user1 = userService.findUserByEmail(email);
+        if (user !=  null || user1 !=  null){
+            return true;
+        }
+        return false;
     }
 
     @GetMapping("/home")

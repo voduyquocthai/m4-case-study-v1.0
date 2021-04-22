@@ -48,7 +48,7 @@
             <div class="card">
                 <div class="card-header bg-primary">
                     <div class="app-brand">
-                        <a href="/admin">
+                        <a th:href="@{/home}">
                             <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
                                  width="30" height="33"
                                  viewBox="0 0 30 33">
@@ -63,6 +63,7 @@
                 </div>
                 <div class="card-body p-5">
                     <h4 class="text-dark mb-5">Sign In</h4>
+                    <h5  th:if="${message}" style="color: red" th:text="${message}"></h5>
                     <form th:action="@{/login}" method="post" th:object="${user}">
                         <div class="row">
                             <div class="form-group col-md-12 mb-4">
@@ -85,9 +86,9 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign In</button>
-                                <p><a class="text-blue" href="#">Forgot Your Password?</a></p>
+                                <p><a class="text-blue" th:href="@{/clients/forgot-password}">Forgot Your Password?</a></p>
                                 <p>Don't have an account yet ?
-                                    <a class="text-blue" href="/register">Sign Up</a>
+                                    <a class="text-blue" th:href="@{/register}">Sign Up</a>
                                 </p>
                             </div>
                         </div>
