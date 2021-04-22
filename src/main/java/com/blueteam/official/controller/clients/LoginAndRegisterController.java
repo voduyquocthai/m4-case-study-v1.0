@@ -1,11 +1,13 @@
 package com.blueteam.official.controller.clients;
 
-import com.blueteam.official.model.Role;
-import com.blueteam.official.model.User;
-import com.blueteam.official.model.UserForm;
+import com.blueteam.official.model.*;
+import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
@@ -18,11 +20,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class LoginAndRegisterController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IProductService productService;
 
     @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\case_module_4\\src\\main\\resources\\static\\client\\img\\user-avatar\\")
     private String fileUpload;
@@ -88,6 +94,7 @@ public class LoginAndRegisterController {
         user.setAvatarUrl(fileName);
         user.setAddress(userForm.getAddress());
         user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setCart(new Cart());
         Role appRole = new Role();
         appRole.setId(1L);
         user.setRole(appRole);
@@ -97,7 +104,10 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/home")
-    public String home(){
-        return "/client/index";
+    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable){
+        ModelAndView modelAndView = new ModelAndView("/client/index");
+        Page<Product> products = productService.findAll(pageable);
+        modelAndView.addObject("products", products);
+        return modelAndView;
     }
 }
