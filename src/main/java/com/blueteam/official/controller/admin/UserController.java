@@ -129,16 +129,7 @@ public class UserController {
         modelAndView = new ModelAndView("redirect:/users/list");
         return modelAndView;
     }
-    @GetMapping("/shop")
-    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Product> products = productService.findAll(pageable);
-        ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
-        modelAndView.addObject("products", products);
-        if (principal != null) {
-            modelAndView.addObject("username", principal.getName());
-        }
-        return modelAndView;
-    }
+
 
 
     @GetMapping("/search")
