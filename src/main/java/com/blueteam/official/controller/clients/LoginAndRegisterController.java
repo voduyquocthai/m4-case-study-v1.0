@@ -5,7 +5,6 @@ import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
-import com.blueteam.official.model.*;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class LoginAndRegisterController {
@@ -129,14 +126,4 @@ public class LoginAndRegisterController {
         return modelAndView;
     }
 
-    @GetMapping("/shop")
-    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Product> products = productService.findAll(pageable);
-        ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
-        modelAndView.addObject("products", products);
-        if (principal != null) {
-            modelAndView.addObject("username", principal.getName());
-        }
-        return modelAndView;
-    }
 }
