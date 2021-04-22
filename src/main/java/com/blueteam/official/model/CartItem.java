@@ -14,12 +14,7 @@ public class CartItem {
 
     private int quantity;
 
-    @Transient
-    public double getSubtotal(){
-        return this.product.getPrice() * quantity;
-    }
-
-
+    private double unitPrice;
 
     @OneToOne
     @JoinColumn( name = "product_id")
