@@ -70,59 +70,46 @@
         <!-- Recent Order Table -->
         <div class="card card-table-border-none" id="recent-orders">
             <div class="card-header justify-content-between">
-                <h2>Product Management</h2>
-
+                <h2>Category Management</h2>
             </div>
             <div class="card-body pt-0 pb-5">
+                <table class="table card-table table-responsive table-responsive-large" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Category ID</th>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="category: ${categories}">
+                        <tr>
+                            <td th:text="${category.id}"></td>
+                            <td >
+                                <a class="text-dark" href="" th:text="${category.name}"></a>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown show d-inline-block widget-dropdown">
+                                    <a class="dropdown-toggle icon-burger-mini" href="" role="button" id="dropdown-recent-order1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
+                                        <li class="dropdown-item">
+                                            <a th:href="@{/admin/categories/edit/__${category.id}__ }">Edit</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a th:href="@{/admin/categories/delete/__${category.id}__ }">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
 
-
-                <form enctype="multipart/form-data" method="post" th:action="@{/admin/products/create}"
-                      th:object="${product}">
-
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServer01">Name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="validationServer01"
-                               placeholder="" value="Md" required>
-                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServer02">Price</label>
-                        <input type="number" th:field="*{price}" class="form-control" id="validationServer02"
-                               placeholder="Last name" value="Rahad" required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Color</label>
-                        <input type="text" th:field="*{color}" class="form-control" id="validationcolor" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Size</label>
-                        <input type="number" th:field="*{size}" class="form-control" id="validation" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Description</label>
-                        <input type="text" th:field="*{description}" class="form-control" id="validationServerUsername" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Image</label>
-                        <input type="file" th:field="*{imgUrl}" class="form-control" id="validation2" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Category</label>
-                        <select th:field="*{category}">
-                            <option th:each="category : ${categories}" th:text="${category.name}"
-                                    th:value="${category.id}"></option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </form>
+                    </tbody>
+                </table>
+                <div>
+                    <a th:href="@{'/admin/categories/list'(page=${categories.number - 1})}" th:if="${categories.hasPrevious()}">Previous</a>
+                    <span th:text="${categories.number + 1}"></span>/<span th:text="${categories.totalPages}"></span>
+                    <a th:href="@{'/admin/categories/list'(page=${categories.number + 1})}" th:if="${categories.hasNext()}">Next</a>
+                </div>
             </div>
         </div>
 

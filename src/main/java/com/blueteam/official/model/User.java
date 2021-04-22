@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -24,10 +22,9 @@ public class User {
     private String username;
 
     @NotEmpty(message = "Not empty")
-    @Size(min = 6, max = 50, message = "Password must be at least 6 characters")
     private String password;
 
-    @Email
+    @Column(unique = true)
     private String email;
 
     private String address;
@@ -39,4 +36,6 @@ public class User {
     @ManyToOne
     private Role role;
 
+    public User(Long id, String username, String password, String email, String address, String phoneNumber, String filename, Role role) {
+    }
 }
