@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -26,6 +27,9 @@
 </head>
 
 <body>
+
+<!-- Header Section Begin -->
+
 <div th:fragment="header">
     <!-- Page Preloder -->
     <div id="preloder">
@@ -154,6 +158,7 @@
                                     class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a href="https://www.facebook.com/thong.tranminh.796/"><i class="fa fa-facebook"></i></a>
+
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
@@ -232,6 +237,7 @@
 <!-- Banner Section End -->
 
 <!-- Product Section Begin -->
+
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -244,76 +250,48 @@
             </div>
         </div>
         <div class="row product__filter">
+            <th:block th:each="product : ${products}">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" th:data-setbg="@{'/upload_img/' + ${product.imgUrl}}">
+                            <span class="label">New</span>
+                            <ul class="product__hover">
+                                <li><a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a></li>
+                                <li><a href="#"><img th:src="@{/img/icon/compare.png}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img th:src="@{/img/icon/search.png}" alt=""></a></li>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales" th:each="p : ${productPage}">
-                <div class="product__item" >
-                    <div class="product__item__pic set-bg" th:data-setbg="@{'../upload_img/'+${p.imgUrl}}">
-                        <ul class="product__hover">
-                            <li><a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a></li>
-                            <li><a href="#"><img th:src="@{/img/icon/compare.png}" alt=""> <span>Compare</span></a></li>
-                            <li><a href="#"><img th:src="@{/img/icon/search.png}" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6 th:text="${p.name}"></h6>
-                        <a href="#" class="add-cart">+ Add To Cart</a>
-                        <div class="rating">
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
+                            </ul>
                         </div>
-                        <h5 th:text="${p.price}"></h5>
-                        <div class="product__color__select">
-                            <label for="pc-4">
-                                <input type="radio" id="pc-4">
-                            </label>
-                            <label class="active black" for="pc-5">
-                                <input type="radio" id="pc-5">
-                            </label>
-                            <label class="grey" for="pc-6">
-                                <input type="radio" id="pc-6">
-                            </label>
+                        <div class="product__item__text">
+                            <h6 th:text="${product.name}"></h6>
+                            <a href="#" class="add-cart">+ Add To Cart</a>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <h5 th:text="${product.price}"></h5>
+                            <div class="product__color__select">
+                                <label for="pc-1">
+                                    <input type="radio" id="pc-1">
+                                </label>
+                                <label class="active black" for="pc-2">
+                                    <input type="radio" id="pc-2">
+                                </label>
+                                <label class="grey" for="pc-3">
+                                    <input type="radio" id="pc-3">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals" th:each="p : ${productPage}">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" th:data-setbg="@{'../upload_img/'+${p.imgUrl}}">
-                        <span class="label">Sale</span>
-                        <ul class="product__hover">
-                            <li><a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a></li>
-                            <li><a href="#"><img th:src="@{/img/icon/compare.png}" alt=""> <span>Compare</span></a></li>
-                            <li><a href="#"><img th:src="@{/img/icon/search.png}" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6 th:text="${p.name}"></h6>
-                        <a href="#" class="add-cart">+ Add To Cart</a>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <h5 th:text="${p.price}"></h5>
-                        <div class="product__color__select">
-                            <label for="pc-7">
-                                <input type="radio" id="pc-7">
-                            </label>
-                            <label class="active black" for="pc-8">
-                                <input type="radio" id="pc-8">
-                            </label>
-                            <label class="grey" for="pc-9">
-                                <input type="radio" id="pc-9">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
+
+
+
+
         </div>
     </div>
 </section>
@@ -442,7 +420,9 @@
 <!-- Latest Blog Section End -->
 
 <!-- Footer Section Begin -->
+
 <footer class="footer" th:fragment="footer">
+
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">

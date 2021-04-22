@@ -1,9 +1,11 @@
 package com.blueteam.official.controller.clients;
 
+
 import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
+import com.blueteam.official.model.*;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class LoginAndRegisterController {
@@ -100,6 +103,7 @@ public class LoginAndRegisterController {
         user.setAvatarUrl(fileName);
         user.setAddress(userForm.getAddress());
         user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setCart(new Cart());
         Role appRole = new Role();
         appRole.setId(1L);
         user.setRole(appRole);
@@ -118,10 +122,10 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/home")
-    public ModelAndView home(@PageableDefault(8) Pageable pageable){
-        Page<Product> productPage = productService.findAll(pageable);
+    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/client/index");
-        modelAndView.addObject("productPage",productPage);
+        Page<Product> products = productService.findAll(pageable);
+        modelAndView.addObject("products", products);
         return modelAndView;
     }
 }

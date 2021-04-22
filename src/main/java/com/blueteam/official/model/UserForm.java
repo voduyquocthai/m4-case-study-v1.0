@@ -28,4 +28,6 @@ public class UserForm {
     private MultipartFile image;
     private String phoneNumber;
     private Role role;
+    public UserForm(Long id, String username, String password, String email, String address, Object o, String phoneNumber, Role role) {
+    }
 }
