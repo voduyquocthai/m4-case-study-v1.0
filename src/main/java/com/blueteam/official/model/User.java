@@ -35,4 +35,5 @@ public class User {
 
     @ManyToOne
     private Role role;
+
 }

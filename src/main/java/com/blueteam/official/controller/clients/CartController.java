@@ -67,7 +67,7 @@ public class CartController {
         } else {
             return null;
         }
-        return "redirect:/users/shop";
+        return "redirect:/shop";
     }
 
     @GetMapping("/update/{username}/{cartItemId}")

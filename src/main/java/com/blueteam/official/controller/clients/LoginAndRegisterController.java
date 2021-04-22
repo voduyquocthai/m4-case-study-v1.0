@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -125,6 +126,17 @@ public class LoginAndRegisterController {
         ModelAndView modelAndView = new ModelAndView("/client/index");
         Page<Product> products = productService.findAll(pageable);
         modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+
+    @GetMapping("/shop")
+    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
+        Page<Product> products = productService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
+        modelAndView.addObject("products", products);
+        if (principal != null) {
+            modelAndView.addObject("username", principal.getName());
+        }
         return modelAndView;
     }
 }
