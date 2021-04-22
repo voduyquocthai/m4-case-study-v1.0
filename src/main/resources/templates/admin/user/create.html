@@ -70,59 +70,61 @@
         <!-- Recent Order Table -->
         <div class="card card-table-border-none" id="recent-orders">
             <div class="card-header justify-content-between">
-                <h2>Product Management</h2>
-
+                <div><h2>Edit User</h2></div>
+                <div><a th:href="@{/users/list}">Back to list</a></div>
             </div>
             <div class="card-body pt-0 pb-5">
 
 
-                <form enctype="multipart/form-data" method="post" th:action="@{/admin/products/create}"
-                      th:object="${product}">
+                <form enctype="multipart/form-data" method="post" th:action="@{/users/create}"
+                      th:object="${userForm}">
+                    <div class="col-md-12 mb-3">
+                        <input type="hidden" th:field="*{id}" class="form-control" id="validationId"
+                               placeholder="" value="Md" required>
+                    </div>
 
                     <div class="col-md-12 mb-3">
-                        <label for="validationServer01">Name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="validationServer01"
-                               placeholder="" value="Md" required>
-                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        <label for="validationServer01">Username</label>
+                        <input type="text" th:field="*{username}" class="form-control" id="validationServer01"
+                               placeholder="Enter Username" value="Md" required>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="validationServer02">Price</label>
-                        <input type="number" th:field="*{price}" class="form-control" id="validationServer02"
-                               placeholder="Last name" value="Rahad" required>
+                        <label for="validationServer02">Password</label>
+                        <input type="password" th:field="*{password}" class="form-control"
+                               placeholder="Enter Password" value="Md">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Color</label>
-                        <input type="text" th:field="*{color}" class="form-control" id="validationcolor" placeholder=""
+                        <label for="validationServer02">Email</label>
+                        <input type="text" th:field="*{email}" class="form-control" id="validationServer02"
+                               placeholder="Enter Email" value="Rahad" >
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationServerUsername">Address</label>
+                        <input type="text" th:field="*{address}" class="form-control" id="validationcolor" placeholder="Enter Address"
                                aria-describedby="inputGroupPrepend3"
-                               required>
+                        >
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Size</label>
-                        <input type="number" th:field="*{size}" class="form-control" id="validation" placeholder=""
+                        <label for="validationServerUsername">Phone Number</label>
+                        <input type="text" th:field="*{phoneNumber}" class="form-control" id="validation" placeholder="Enter Phone Number"
                                aria-describedby="inputGroupPrepend3"
-                               required>
+                        >
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Description</label>
-                        <input type="text" th:field="*{description}" class="form-control" id="validationServerUsername" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
+                        <label for="validationServerUsername">Avatar</label>
+                        <input type="file" th:field="*{image}" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Image</label>
-                        <input type="file" th:field="*{imgUrl}" class="form-control" id="validation2" placeholder=""
-                               aria-describedby="inputGroupPrepend3"
-                               required>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="validationServerUsername">Category</label>
-                        <select th:field="*{category}">
-                            <option th:each="category : ${categories}" th:text="${category.name}"
-                                    th:value="${category.id}"></option>
+                        <label for="validationServerUsername">Role</label>
+                        <select th:field="*{role}">
+                            <option th:each="r : ${roles}" th:selected="*{role}!=null ? (${r.id} == *{role.id}) : false"
+                                    th:text="${r.name}"
+                                    th:value="${r.id}"></option>
                         </select>
                     </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
+
             </div>
         </div>
 
@@ -140,7 +142,6 @@
             </script>
         </footer>
 
-        </header>
     </div>
 
 
@@ -163,7 +164,6 @@
     <script th:src="@{/assets/js/date-range.js}"></script>
     <script th:src="@{/assets/js/map.js}"></script>
     <script th:src="@{/assets/js/custom.js}"></script>
-
 </div>
 </body>
 </html>

@@ -1,11 +1,18 @@
 package com.blueteam.official.controller.clients;
 
+
+import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
+import com.blueteam.official.model.*;
+import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
@@ -18,11 +25,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class LoginAndRegisterController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IProductService productService;
 
     @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\case_module_4\\src\\main\\resources\\static\\client\\img\\user-avatar\\")
     private String fileUpload;
@@ -35,7 +46,6 @@ public class LoginAndRegisterController {
     @PostMapping("/login")
     public ModelAndView login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         ModelAndView modelAndView;
-        String message = "Username or password aren't incorrect";
         if (bindingResult.hasFieldErrors()) {
             modelAndView = new ModelAndView("/client/sign-in");
             return modelAndView;
@@ -44,6 +54,7 @@ public class LoginAndRegisterController {
                 return new ModelAndView("/client/index");
             } else {
                 modelAndView = new ModelAndView("/client/sign-in");
+                String message = "Username or password aren't incorrect";
                 modelAndView.addObject("message", message);
                 return modelAndView;
             }
@@ -61,7 +72,7 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/register")
-    public ModelAndView logout() {
+    public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView("/client/sign-up");
         modelAndView.addObject("userForm", new UserForm());
         return modelAndView;
@@ -73,6 +84,10 @@ public class LoginAndRegisterController {
         if (bindingResult.hasFieldErrors()) {
             modelAndView = new ModelAndView("/client/sign-up");
             return modelAndView;
+        }
+        if (checkAccount(userForm.getUsername(),userForm.getEmail())){
+            String message = "Username or email existed!!";
+            return  new ModelAndView("/client/sign-up", "message",message);
         }
         MultipartFile multipartFile = userForm.getImage();
         String fileName = multipartFile.getOriginalFilename();
@@ -88,6 +103,7 @@ public class LoginAndRegisterController {
         user.setAvatarUrl(fileName);
         user.setAddress(userForm.getAddress());
         user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setCart(new Cart());
         Role appRole = new Role();
         appRole.setId(1L);
         user.setRole(appRole);
@@ -96,8 +112,20 @@ public class LoginAndRegisterController {
         return modelAndView;
     }
 
+    private boolean checkAccount(String username, String email){
+        User  user = userService.findUserByUserName(username);
+        User  user1 = userService.findUserByEmail(email);
+        if (user !=  null || user1 !=  null){
+            return true;
+        }
+        return false;
+    }
+
     @GetMapping("/home")
-    public String home(){
-        return "/client/index";
+    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable){
+        ModelAndView modelAndView = new ModelAndView("/client/index");
+        Page<Product> products = productService.findAll(pageable);
+        modelAndView.addObject("products", products);
+        return modelAndView;
     }
 }
