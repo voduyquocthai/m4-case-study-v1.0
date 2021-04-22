@@ -24,7 +24,7 @@ public class LoginAndRegisterController {
     @Autowired
     private IUserService userService;
 
-    @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\case_module_4\\src\\main\\resources\\static\\client\\img\\user-avatar\\")
+    @Value(value = "")
     private String fileUpload;
 
     @GetMapping("/login")
