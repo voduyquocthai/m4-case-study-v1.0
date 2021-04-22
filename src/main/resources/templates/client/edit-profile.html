@@ -33,8 +33,9 @@
             <div class="page-wrapper">
                 <div class="card card-table-border-none" id="recent-orders">
                     <div class="card-header justify-content-between">
-                        <div><h2>Edit Profile</h2></div>
-                        <div><a th:href="@{/clients/userDetail}">Cancel</a></div>
+                        <div>
+                            <h2>Edit Profile</h2>
+                        </div>
                     </div>
                     <div class="card-body pt-0 pb-5">
                         <form enctype="multipart/form-data" method="post" th:action="@{/clients/edit-profile}"
@@ -47,35 +48,36 @@
                             <div class="col-md-12 mb-3">
                                 <label for="validationServer01">Username</label>
                                 <input type="text" th:field="*{username}" class="form-control" id="validationServer01"
-                                       placeholder="" value="Md" required>
+                                       placeholder="Username" value="Md" required>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <input type="hidden" th:field="*{password}" class="form-control"
-                                       placeholder="" value="Md">
+                                <label>Password</label>
+                                <input type="password" th:field="*{password}" class="form-control"
+                                       placeholder="Password" value="Md">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="validationServer02">Email</label>
                                 <input type="text" th:field="*{email}" class="form-control" id="validationServer02"
-                                       placeholder="Last name" value="Rahad">
+                                       placeholder="Email" value="Rahad">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="validationServerUsername">Address</label>
                                 <input type="text" th:field="*{address}" class="form-control" id="validationcolor"
-                                       placeholder=""
+                                       placeholder="Address"
                                        aria-describedby="inputGroupPrepend3"
                                 >
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="validationServerUsername">Phone Number</label>
                                 <input type="text" th:field="*{phoneNumber}" class="form-control" id="validation"
-                                       placeholder=""
+                                       placeholder="Phone Number"
                                        aria-describedby="inputGroupPrepend3"
                                 >
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="validationServerUsername">Avatar</label>
                                 <input type="file" th:field="*{image}" class="form-control"
-                                       id="validationServerUsername" placeholder=""
+                                       id="validationServerUsername" placeholder="Enter Avatar"
                                        aria-describedby="inputGroupPrepend3"
                                 >
                             </div>
@@ -87,7 +89,11 @@
                                             th:value="${r.id}"></option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <div class="col-md-12 mb-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <a th:href="@{/clients/userDetail}" class="btn btn-success">Cancel</a>
+                            </div>
+
                         </form>
 
                     </div>

@@ -81,6 +81,7 @@
                             <div class="header__top__links">
                                 <div >
                                     <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+                                    <a sec:authorize="isAnonymous()" th:href="@{/register}">Register</a>
                                 </div>
                                 <div sec:authorize="isAuthenticated()">
                                     <a sec:authentication="principal.username"  th:href="@{/clients/userDetail}"></a>
