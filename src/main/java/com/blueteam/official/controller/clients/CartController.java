@@ -37,12 +37,7 @@ public class CartController {
         User user = userService.findUserByUserName(username);
         Iterable<CartItem> cartItems = cartItemService.findAllByUser(user);
         ModelAndView modelAndView = new ModelAndView("client/shop/shopping-cart");
-        double sum = 0.0;
-        for (CartItem cartItem : cartItems) {
-            sum += (cartItem.getProduct().getPrice() * cartItem.getQuantity());
-        }
         modelAndView.addObject("cartItems", cartItems);
-        modelAndView.addObject("sum", sum);
         modelAndView.addObject("username", username);
         return modelAndView;
 
@@ -67,7 +62,7 @@ public class CartController {
         } else {
             return null;
         }
-        return "redirect:/shop";
+        return "redirect:/guests/shop";
     }
 
     @GetMapping("/update/{username}/{cartItemId}")
