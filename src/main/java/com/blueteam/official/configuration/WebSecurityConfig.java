@@ -34,6 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/home")
                 .and()
                 .logout().logoutSuccessUrl("/home")
-                .and().exceptionHandling().accessDeniedPage("/error-404");
+                .and().exceptionHandling().accessDeniedPage("/guests/error-403");
     }
 }

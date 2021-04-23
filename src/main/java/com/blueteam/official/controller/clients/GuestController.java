@@ -67,6 +67,11 @@ public class GuestController {
         return modelAndView;
     }
 
+    @GetMapping("/error-403")
+    private String error(){
+        return "error-403";
+    }
+
     @GetMapping("/shop-details")
     public ModelAndView shopDetail(){
         return new ModelAndView("/client/shop/shop-details");
