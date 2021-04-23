@@ -7,8 +7,6 @@ import com.blueteam.official.service.IRoleService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +28,7 @@ public class ClientController {
     @Autowired
     private IRoleService roleService;
 
-    @Autowired
-    private JavaMailSender mailSender;
+
 
     @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\m4-case-study-v1.0\\src\\main\\resources\\static\\img\\user-avatar\\")
     private String uploadFile;
@@ -76,31 +73,6 @@ public class ClientController {
         ModelAndView modelAndView = new ModelAndView("redirect:/clients/userDetail");
         modelAndView.addObject("userForm", userForm);
         return modelAndView;
-    }
-
-    @GetMapping("/forgot-password")
-    private ModelAndView showFormGetPass(){
-        return new ModelAndView("/client/forgot-pass");
-    }
-
-    private User checkEmail(String email){
-        return userService.findUserByEmail(email);
-    }
-
-    @PostMapping("/forgot-password")
-    private ModelAndView forgotPass(@RequestParam(value = "email") String email){
-        User user = checkEmail(email);
-        if (user != null){
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(email);
-            message.setSubject("Get Password");
-            message.setText("Your password: " + user.getPassword());
-            mailSender.send(message);
-            String notify = "Please check your email";
-            return new ModelAndView("/client/forgot-pass","notify",notify);
-        }
-        String notify1 = "Email address incorrect!!";
-        return new ModelAndView("/client/forgot-pass","notify1",notify1);
     }
 
 }

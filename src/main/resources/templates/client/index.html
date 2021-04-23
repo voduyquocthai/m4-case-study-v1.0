@@ -56,7 +56,7 @@
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
             <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-            <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
+            <a href="#"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
             <div class="price">$0.00</div>
         </div>
         <div id="mobile-menu-wrap"></div>
@@ -115,15 +115,15 @@
                             <li><a th:href="@{/shop}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a th:href="@{/users/about}">About Us</a></li>
-                                    <li><a th:href="@{/shop-detail/__${username}__}">Shop Details</a></li>
+                                    <li><a th:href="@{/guests/about}">About Us</a></li>
+                                    <li><a th:href="@{/guests/shop-details}">Shop Details</a></li>
                                     <li><a th:href="@{/cart/show/__${username}__}">Shopping Cart</a></li>
                                     <li><a th:href="@{/users/checkout}">Check Out</a></li>
-                                    <li><a th:href="@{/users/blogdetail}">Blog Details</a></li>
+                                    <li><a th:href="@{/guests/blogdetail}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a th:href="@{/users/blog}">Blog</a></li>
-                            <li><a th:href="@{/users/contact}">Contacts</a></li>
+                            <li><a th:href="@{/guests/blog}">Blog</a></li>
+                            <li><a th:href="@{/guests/contact}">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -131,7 +131,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
                         <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-                        <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
+                        <a href="#"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
