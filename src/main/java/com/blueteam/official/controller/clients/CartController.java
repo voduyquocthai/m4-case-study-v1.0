@@ -4,7 +4,6 @@ import com.blueteam.official.model.CartItem;
 import com.blueteam.official.model.Product;
 import com.blueteam.official.model.User;
 import com.blueteam.official.service.ICartService;
-import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

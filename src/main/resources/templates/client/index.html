@@ -131,7 +131,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
                         <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-                        <a href="#" th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
+                        <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                             <h2>Fall - Winter Collections 2030</h2>
                             <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                 commitment to exceptional quality.</p>
-                            <a th:href="@{/guest/shop}" class="primary-btn">Shop now <span
+                            <a th:href="@{/guests/shop}" class="primary-btn">Shop now <span
                                     class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a href="https://www.facebook.com/thong.tranminh.796/"><i class="fa fa-facebook"></i></a>
@@ -288,10 +288,6 @@
                     </div>
                 </div>
             </th:block>
-
-
-
-
         </div>
     </div>
 </section>
@@ -438,7 +434,7 @@
                 <div class="footer__widget">
                     <h6>Shopping</h6>
                     <ul>
-                        <li><a href="#">Clothing Store</a></li>
+                        <li><a th:href="@{/guests/shop}">Clothing Store</a></li>
                         <li><a href="#">Trending Shoes</a></li>
                         <li><a href="#">Accessories</a></li>
                         <li><a href="#">Sale</a></li>
@@ -449,7 +445,7 @@
                 <div class="footer__widget">
                     <h6>Shopping</h6>
                     <ul>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a th:href="@{/guests/contact}">Contact Us</a></li>
                         <li><a href="#">Payment Methods</a></li>
                         <li><a href="#">Delivary</a></li>
                         <li><a href="#">Return & Exchanges</a></li>
