@@ -6,6 +6,7 @@ import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
 import com.blueteam.official.model.*;
+import com.blueteam.official.service.ICartService;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +37,9 @@ public class LoginAndRegisterController {
 
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private ICartService cartItemService;
 
     @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\case_module_4\\src\\main\\resources\\static\\client\\img\\user-avatar\\")
     private String fileUpload;
@@ -139,4 +144,18 @@ public class LoginAndRegisterController {
         }
         return modelAndView;
     }
+
+//    @GetMapping("/shop-detail/{username}")
+//    public ModelAndView showProductDetailForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable ,@PathVariable("username") String username) {
+//        User user = userService.findUserByUserName(username);
+//        Page<Product> products = productService.findAll(pageable);
+//        Iterable<CartItem> cartItems = cartItemService.findAllByUser(user);
+//        ModelAndView modelAndView = new ModelAndView("/client/shop/shop-details");
+//        modelAndView.addObject("products", products);
+//        modelAndView.addObject("cartItems", cartItems);
+//        if (principal != null) {
+//            modelAndView.addObject("username", principal.getName());
+//        }
+//        return modelAndView;
+//    }
 }
