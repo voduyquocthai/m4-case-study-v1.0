@@ -3,8 +3,10 @@ package com.blueteam.official.controller.admin;
 import com.blueteam.official.model.Category;
 import com.blueteam.official.model.Product;
 import com.blueteam.official.model.ProductForm;
+import com.blueteam.official.model.User;
 import com.blueteam.official.service.ICategoryService;
 import com.blueteam.official.service.IProductService;
+import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -33,6 +36,9 @@ public class ProductController {
     @Autowired
     private ICategoryService categoryService;
 
+    @Autowired
+    private IUserService userService;
+
     @Value(value = "${upload.path}")
     private String fileUpload;
 
@@ -40,6 +46,11 @@ public class ProductController {
     public Iterable<Category> getAllCategory(){
         Iterable<Category> categories = categoryService.findAll();
         return categories;
+    }
+
+    @ModelAttribute("admin")
+    private User getUser(Principal principal){
+        return userService.findUserByUserName(principal.getName());
     }
 
     @GetMapping("/list")

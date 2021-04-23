@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-body p-5">
                     <h4 class="text-dark mb-5">Sign In</h4>
-                    <h5  th:if="${message}" style="color: red" th:text="${message}"></h5>
+                    <h5 th:if="${message}" style="color: red" th:text="${message}"></h5>
                     <form th:action="@{/login}" method="post" th:object="${user}">
                         <div class="row">
                             <div class="form-group col-md-12 mb-4">
@@ -86,7 +86,8 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign In</button>
-                                <p><a class="text-blue" th:href="@{/guests/forgot-password}">Forgot Your Password?</a></p>
+                                <p><a class="text-blue" th:href="@{/guests/forgot-password}">Forgot Your Password?</a>
+                                </p>
                                 <p>Don't have an account yet ?
                                     <a class="text-blue" th:href="@{/register}">Sign Up</a>
                                 </p>
@@ -98,7 +99,11 @@
         </div>
     </div>
     <div class="copyright pl-0">
-        <p class="text-center">&copy; 2018 Copyright Sleek Dashboard Bootstrap Template by
+        <p class="text-center">&copy;
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            Copyright Sleek Dashboard Bootstrap Template by
             <a class="text-primary" href="http://www.iamabdus.com/" target="_blank">Abdus</a>.
         </p>
     </div>
