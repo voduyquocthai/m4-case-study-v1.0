@@ -1,6 +1,5 @@
 package com.blueteam.official.controller.admin;
 
-import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
@@ -40,6 +39,11 @@ public class UserController {
 
     @Value(value = "${upload.path}")
     private String uploadFile;
+
+    @ModelAttribute("admin")
+    private User getUser(Principal principal){
+        return userService.findUserByUserName(principal.getName());
+    }
 
     @GetMapping("/list")
     private ModelAndView showAllUser(@PageableDefault Pageable pageable) {
