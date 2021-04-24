@@ -3,7 +3,6 @@ package com.blueteam.official.controller.admin;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
-import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IRoleService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,7 @@ public class UserController {
     @Autowired
     private IRoleService roleService;
 
-    @Autowired
-    private IProductService productService;
-
-    @Value(value = "${upload.path}")
+    @Value(value = "${upload.path.avatar}")
     private String uploadFile;
 
     @ModelAttribute("admin")
@@ -46,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    private ModelAndView showAllUser(@PageableDefault Pageable pageable) {
+    private ModelAndView showAllUser(@PageableDefault(5) Pageable pageable) {
         Page<User> users = userService.findAll(pageable);
         return new ModelAndView("/admin/user/list", "users", users);
     }
@@ -78,7 +74,6 @@ public class UserController {
             e.printStackTrace();
         }
         User user = new User(userForm.getId(), userForm.getUsername(), userForm.getPassword(), userForm.getEmail(), userForm.getAddress(), userForm.getPhoneNumber(), filename, userForm.getRole());
-
         userService.save(user);
         ModelAndView modelAndView = new ModelAndView("/admin/user/edit");
         modelAndView.addObject("userForm", userForm);
@@ -133,8 +128,6 @@ public class UserController {
         modelAndView = new ModelAndView("redirect:/users/list");
         return modelAndView;
     }
-
-
 
     @GetMapping("/search")
     private ModelAndView search(@RequestParam("key") String key,@PageableDefault(5) Pageable pageable){

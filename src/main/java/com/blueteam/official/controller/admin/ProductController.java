@@ -39,7 +39,7 @@ public class ProductController {
     @Autowired
     private IUserService userService;
 
-    @Value(value = "${upload.path}")
+    @Value(value = "${upload.path.product}")
     private String fileUpload;
 
     @ModelAttribute("categories")
