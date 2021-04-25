@@ -122,9 +122,12 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/home")
-    public ModelAndView home(@PageableDefault(size = 5) Pageable pageable){
+    public ModelAndView home(Principal principal, @PageableDefault(size = 5) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/client/index");
         Page<Product> products = productService.findAll(pageable);
+        if (principal != null) {
+            modelAndView.addObject("username", principal.getName());
+        }
         modelAndView.addObject("products", products);
         return modelAndView;
     }

@@ -264,7 +264,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6 th:text="${product.name}"></h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
+                            <a th:href="@{/cart/add/__${username}__/__${product.id}__}" class="add-cart">+ Add To Cart</a>
                             <div class="rating">
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
