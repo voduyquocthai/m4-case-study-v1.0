@@ -105,25 +105,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a th:href="@{/userw/index}"><img th:src="@{/img/logo.png}" alt=""></a>
+                        <a th:href="@{/home}"><img th:src="@{/img/logo.png}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a th:href="@{/home}">Home</a></li>
-                            <li><a th:href="@{/shop}">Shop</a></li>
+                            <li><a th:href="@{/guests/shop}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a th:href="@{/users/about}">About Us</a></li>
-                                    <li><a th:href="@{/users/shop-details}">Shop Details</a></li>
+                                    <li><a th:href="@{/guests/about}">About Us</a></li>
+                                    <li><a th:href="@{/guests/shop-details}">Shop Details</a></li>
                                     <li><a th:href="@{/cart/show/__${username}__}">Shopping Cart</a></li>
                                     <li><a th:href="@{/users/checkout}">Check Out</a></li>
-                                    <li><a th:href="@{/users/blogdetail}">Blog Details</a></li>
+                                    <li><a th:href="@{/guests/blogdetail}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a th:href="@{/users/blog}">Blog</a></li>
-                            <li><a th:href="@{/users/contact}">Contacts</a></li>
+                            <li><a th:href="@{/guests/blog}">Blog</a></li>
+                            <li><a th:href="@{/guests/contact}">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -131,7 +131,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
                         <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-                        <a href="#"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
+                        <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -288,10 +288,6 @@
                     </div>
                 </div>
             </th:block>
-
-
-
-
         </div>
     </div>
 </section>
@@ -438,7 +434,7 @@
                 <div class="footer__widget">
                     <h6>Shopping</h6>
                     <ul>
-                        <li><a href="#">Clothing Store</a></li>
+                        <li><a th:href="@{/guests/shop}">Clothing Store</a></li>
                         <li><a href="#">Trending Shoes</a></li>
                         <li><a href="#">Accessories</a></li>
                         <li><a href="#">Sale</a></li>
@@ -449,7 +445,7 @@
                 <div class="footer__widget">
                     <h6>Shopping</h6>
                     <ul>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a th:href="@{/guests/contact}">Contact Us</a></li>
                         <li><a href="#">Payment Methods</a></li>
                         <li><a href="#">Delivary</a></li>
                         <li><a href="#">Return & Exchanges</a></li>

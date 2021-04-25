@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors().disable();
-        http.authorizeRequests().antMatchers("/home","/login","/register","/clients/forgot-password", "/shop").permitAll()
+        http.authorizeRequests().antMatchers("/home","/login","/register","/clients/forgot-password", "/shop","/guests/**").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/admin/**","/users/**").hasRole("ADMIN")
                 .and()
@@ -34,6 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/home")
                 .and()
                 .logout().logoutSuccessUrl("/home")
-                .and().exceptionHandling().accessDeniedPage("/error-404");
+                .and().exceptionHandling().accessDeniedPage("/guests/error-403");
     }
 }

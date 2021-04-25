@@ -1,9 +1,9 @@
 package com.blueteam.official.controller.admin;
 
 import com.blueteam.official.model.Category;
-import com.blueteam.official.model.Product;
-import com.blueteam.official.model.ProductForm;
+import com.blueteam.official.model.User;
 import com.blueteam.official.service.ICategoryService;
+import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +22,13 @@ public class CategoryController {
     @Autowired
     ICategoryService categoryService;
 
+    @Autowired
+    private IUserService userService;
+
+    @ModelAttribute("admin")
+    private User getUser(Principal principal){
+        return userService.findUserByUserName(principal.getName());
+    }
     @GetMapping("/list")
     public ModelAndView showAll(@RequestParam("name") Optional<String> name, @PageableDefault(size = 5) Pageable pageable){
         Page<Category> categories;

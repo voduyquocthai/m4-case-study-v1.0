@@ -5,7 +5,6 @@ import com.blueteam.official.model.Product;
 import com.blueteam.official.model.Role;
 import com.blueteam.official.model.User;
 import com.blueteam.official.model.UserForm;
-import com.blueteam.official.model.*;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class LoginAndRegisterController {
     @Autowired
     private IProductService productService;
 
-    @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\case_module_4\\src\\main\\resources\\static\\client\\img\\user-avatar\\")
+    @Value(value = "${upload.path.avatar}")
     private String fileUpload;
 
     @GetMapping("/login")
