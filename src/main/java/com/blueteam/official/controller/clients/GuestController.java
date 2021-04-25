@@ -1,7 +1,9 @@
 package com.blueteam.official.controller.clients;
 
+import com.blueteam.official.model.CartItem;
 import com.blueteam.official.model.Product;
 import com.blueteam.official.model.User;
+import com.blueteam.official.service.ICartService;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class GuestController {
     @Autowired
     private IProductService productService;
 
+    @Autowired
+    private ICartService cartItemService;
+
 
     @GetMapping("/forgot-password")
     private ModelAndView showFormGetPass(){
@@ -57,7 +62,7 @@ public class GuestController {
     }
 
     @GetMapping("/shop")
-    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable, @RequestParam("name")Optional<String> name) {
+    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable, @RequestParam("q")Optional<String> name) {
         Page<Product> products;
         if (name.isPresent()) {
             String query = "%" + name.get() + "%";
