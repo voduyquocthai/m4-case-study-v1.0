@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/guests")
@@ -56,8 +57,14 @@ public class GuestController {
     }
 
     @GetMapping("/shop")
-    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Product> products = productService.findAll(pageable);
+    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable, @RequestParam("name")Optional<String> name) {
+        Page<Product> products;
+        if (name.isPresent()) {
+            String query = "%" + name.get() + "%";
+            products = productService.findAllProductByNameUsingQuery(query, pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
         modelAndView.addObject("products", products);
         if (principal != null) {
