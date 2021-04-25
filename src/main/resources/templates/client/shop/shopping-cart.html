@@ -71,9 +71,7 @@
                                 </div>
                                 <div class="product__cart__item__text">
                                     <h6 th:text="${item.product.name}"></h6>
-                                    <h5
-                                            th:text="'$' + ${item.product.price}">
-                                    </h5>
+                                    <p style="font-size: large; font-weight: bold " th:text="'$'+ ${item.product.price}"></p>
                                 </div>
                             </td>
                             <td class="quantity__item">
@@ -88,7 +86,7 @@
                                     <!--                                        <input type="text" th:value="${item.quantity}">-->
                                 </div>
                             </td>
-                            <td class="cart__price" th:text="${item.quantity * item.getProduct().getPrice()} "></td>
+                            <td class="cart__price" th:text="${item.quantity * item.getProduct().getPrice()} ">$</td>
                             <td class="cart__close"><a th:href="@{/cart/delete/__${item.id}__/__${username}__}"><i
                                     class="fa fa-close"></i></a></td>
                         </tr>
@@ -101,11 +99,6 @@
                             <a href="#">Continue Shopping</a>
                         </div>
                     </div>
-                    <!--                    <div class="col-lg-6 col-md-6 col-sm-6">-->
-                    <!--                        <div class="continue__btn update__btn">-->
-                    <!--                            <a th:href="@{/cart/update/__${username}__/__${item.id}__}"><i class="fa fa-spinner"></i> Update cart</a>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                 </div>
             </div>
             <div class="col-lg-4">
@@ -116,10 +109,10 @@
                         <button type="submit">Apply</button>
                     </form>
                 </div>
-                <div class="cart__total">
+                <div class="cart__total" th:each="item:${cartItems}"  >
                     <h6>Cart total</h6>
                     <ul>
-                        <li>Total <span id="totalAmount"></span></li>
+                        <li>Total <span th:text="${item.totalMoney}"></span></li>
                     </ul>
                     <a href="#" class="primary-btn">Proceed to checkout</a>
                 </div>
@@ -220,7 +213,7 @@
 <script th:src="@{/js/mixitup.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/shopping_cart.js}"></script>
+<!--<script th:src="@{/js/shopping_cart.js}"></script>-->
 </body>
 
 </html>

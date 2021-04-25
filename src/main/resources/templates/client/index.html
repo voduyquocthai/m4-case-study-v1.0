@@ -56,8 +56,8 @@
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
             <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-            <a href="#"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+            <a href="#" th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span></span></a>
+            <div class="price totalAmount"></div>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -128,11 +128,11 @@
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
+                    <div class="header__nav__option" th:each="product:${products}">
                         <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
                         <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-                        <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span></span></a>
+                        <div class="price"></div>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6 th:text="${product.name}"></h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
+                            <a href="#" th:href="@{/cart/add/__${username}__/__${product.id}__}" class="add-cart">+ Add To Cart</a>
                             <div class="rating">
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
@@ -272,7 +272,7 @@
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                             </div>
-                            <h5 th:text="${product.price}"></h5>
+                            <p class="cart__price" style="font-size: large; font-weight: bold " th:text="'$'+ ${product.price}"></p>
                             <div class="product__color__select">
                                 <label for="pc-1">
                                     <input type="radio" id="pc-1">

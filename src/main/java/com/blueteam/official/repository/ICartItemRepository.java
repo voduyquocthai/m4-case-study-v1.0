@@ -22,6 +22,10 @@ public interface ICartItemRepository extends JpaRepository<CartItem, Long> {
     @Query("SELECT ci from CartItem ci where ci.product=:product and ci.user=:user")
     CartItem findCartItem(@Param("user") User user, @Param("product") Product product);
 
+    @Query( value = "select sum(p.price*ci.quantity) from cart_item ci join product p on p.id = ci.product_id order by user_id;", nativeQuery = true)
+    Double calculateMoneyById(Long CartItemId);
+
+
     @Modifying
     @Query("DELETE from CartItem ci where ci.id=:cartItemId")
     void deleteCartItemByUser(@Param("cartItemId") Long cartItemId);

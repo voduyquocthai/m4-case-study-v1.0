@@ -60,6 +60,11 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
+    public Double calculateMoneyById(Long CartItemId) {
+        return cartItemRepository.calculateMoneyById(CartItemId);
+    }
+
+    @Override
     @Transactional
     public void deleteCartItemByUser(Long id) {
         cartItemRepository.deleteCartItemByUser(id);
