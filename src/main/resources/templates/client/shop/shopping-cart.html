@@ -101,18 +101,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" th:each="item:${cartItems}">
                 <div class="cart__discount">
                     <h6>Discount codes</h6>
-                    <form action="#">
+                    <form action="#"
                         <input type="text" placeholder="Coupon code">
                         <button type="submit">Apply</button>
                     </form>
                 </div>
-                <div class="cart__total" th:each="item:${cartItems}"  >
+                <div class="cart__total" >
                     <h6>Cart total</h6>
-                    <ul>
-                        <li>Total <span th:text="${item.totalMoney}"></span></li>
+                    <ul  >
+                        <li>Total <span th:text="${item.getTotalMoney()}"></span></li>
                     </ul>
                     <a href="#" class="primary-btn">Proceed to checkout</a>
                 </div>

@@ -35,7 +35,7 @@ public class CartController {
         Iterable<CartItem> cartItems = cartItemService.findAllByUser(user);
         ModelAndView modelAndView = new ModelAndView("client/shop/shopping-cart");
         for (CartItem cartItem : cartItems){
-        cartItem.setTotalMoney(cartItemService.calculateMoneyById(cartItem.getId()));
+          cartItem.setTotalMoney(cartItemService.calculateMoneyById(cartItem.getId()));
         }
         modelAndView.addObject("cartItems", cartItems);
         modelAndView.addObject("username", username);
