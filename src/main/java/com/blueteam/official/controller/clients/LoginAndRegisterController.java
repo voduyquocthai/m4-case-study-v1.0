@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 public class LoginAndRegisterController {
@@ -119,10 +120,14 @@ public class LoginAndRegisterController {
     }
 
     @GetMapping("/home")
-    public ModelAndView home(@PageableDefault(8) Pageable pageable){
+
+    public ModelAndView home(Principal  principal, @PageableDefault(size = 8) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/client/index");
         Page<Product> products = productService.findAll(pageable);
         modelAndView.addObject("products", products);
+        if (principal != null) {
+            modelAndView.addObject("username", principal.getName());
+        }
         return modelAndView;
     }
 

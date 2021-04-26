@@ -56,8 +56,8 @@
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
             <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
-            <a href="#"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+            <a href="#" th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span></span></a>
+            <div class="price"></div>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -128,11 +128,11 @@
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
+                    <div class="header__nav__option" th:each="product:${products}">
                         <a href="#" class="search-switch"><img th:src="@{/img/icon/search.png}" alt=""></a>
                         <a href="#"><img th:src="@{/img/icon/heart.png}" alt=""></a>
                         <a th:href="@{/cart/show/__${username}__}"><img th:src="@{/img/icon/cart.png}" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <div class="price" th:text="${product.}"></div>
                     </div>
                 </div>
             </div>
@@ -445,7 +445,7 @@
                 <div class="footer__widget">
                     <h6>Shopping</h6>
                     <ul>
-                        <li><a th:href="@{/guests/contact}">Contact Us</a></li>
+                        <li><a th:href="@{/guests/about}">Contact Us</a></li>
                         <li><a href="#">Payment Methods</a></li>
                         <li><a href="#">Delivary</a></li>
                         <li><a href="#">Return & Exchanges</a></li>

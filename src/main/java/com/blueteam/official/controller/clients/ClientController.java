@@ -28,8 +28,6 @@ public class ClientController {
     @Autowired
     private IRoleService roleService;
 
-
-
     @Value(value = "C:\\Users\\thait\\OneDrive\\Desktop\\m4-case-study-v1.0\\src\\main\\resources\\static\\img\\user-avatar\\")
     private String uploadFile;
 

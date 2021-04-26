@@ -20,4 +20,5 @@ public class CartItem {
 
     private Integer quantity;
 
+    private Double TotalMoney;
 }

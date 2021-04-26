@@ -1,7 +1,9 @@
 package com.blueteam.official.controller.clients;
 
+import com.blueteam.official.model.CartItem;
 import com.blueteam.official.model.Product;
 import com.blueteam.official.model.User;
+import com.blueteam.official.service.ICartService;
 import com.blueteam.official.service.IProductService;
 import com.blueteam.official.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +13,15 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/guests")
+
 public class GuestController {
     @Autowired
     private JavaMailSender mailSender;
@@ -30,6 +31,10 @@ public class GuestController {
 
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private ICartService cartItemService;
+
 
     @GetMapping("/forgot-password")
     private ModelAndView showFormGetPass(){
@@ -57,8 +62,14 @@ public class GuestController {
     }
 
     @GetMapping("/shop")
-    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Product> products = productService.findAll(pageable);
+    public ModelAndView showProductListForCustomer(Principal principal, @PageableDefault(size = 10) Pageable pageable, @RequestParam("q")Optional<String> name) {
+        Page<Product> products;
+        if (name.isPresent()) {
+            String query = "%" + name.get() + "%";
+            products = productService.findAllProductByNameUsingQuery(query, pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/client/shop/shop");
         modelAndView.addObject("products", products);
         if (principal != null) {

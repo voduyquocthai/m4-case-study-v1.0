@@ -29,19 +29,15 @@ public class CartController {
         return userService.findUserByUserName(principal.getName());
     }
 
-
-
     @GetMapping("/show/{username}")
     public ModelAndView showCart(@PathVariable("username") String username) {
         User user = userService.findUserByUserName(username);
         Iterable<CartItem> cartItems = cartItemService.findAllByUser(user);
         ModelAndView modelAndView = new ModelAndView("client/shop/shopping-cart");
-        double sum = 0.0;
-        for (CartItem cartItem : cartItems) {
-            sum += (cartItem.getProduct().getPrice() * cartItem.getQuantity());
+        for (CartItem cartItem : cartItems){
+        cartItem.setTotalMoney(cartItemService.calculateMoneyById(cartItem.getId()));
         }
         modelAndView.addObject("cartItems", cartItems);
-        modelAndView.addObject("sum", sum);
         modelAndView.addObject("username", username);
         return modelAndView;
 

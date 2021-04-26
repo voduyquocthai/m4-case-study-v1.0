@@ -25,6 +25,8 @@ public interface ICartService extends IGeneralService<CartItem> {
 
     CartItem findCartItem(User user, Product product);
 
+    Double calculateMoneyById(Long CartItemId);
+
     void deleteCartItemByUser(Long id);
 
 }
