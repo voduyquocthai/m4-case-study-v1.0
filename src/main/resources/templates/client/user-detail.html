@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+
+    <!-- Google Font -->
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap}"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+
+<body class="header-light header-fixed" id="body">
+<div th:replace="/client/index :: header"></div>
+
+<!-- Header Section End -->
+<section class="spad">
+    <div class="container">
+        <div class="wrapper">
+            <div class="page-wrapper">
+                <div class="content-wrapper">
+                    <div class="content">
+                        <div class="bg-white border rounded">
+                            <div class="row no-gutters">
+                                <div class="col-lg-4 col-xl-12">
+                                    <div class="profile-content-left pt-5 pb-3 px-3 px-xl-5">
+                                        <div class="card text-center widget-profile px-0 border-0">
+                                            <div class="card-img mx-auto rounded-circle">
+                                                <img style="width: 200px;height: 200px;" th:src="@{'/img/user-avatar/' + ${user.avatarUrl}}" class="rounded-circle" alt="user image">
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="py-2 text-dark" th:text="${user.username}"></h4>
+                                                <p th:text="${user.email}"></p>
+                                            </div>
+                                        </div>
+                                        <hr class="w-100">
+                                        <div class="contact-info pt-4">
+                                            <h5 class="text-dark mb-1">Contact Information</h5>
+                                            <p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
+                                            <p th:text="${user.email}"></p>
+                                            <p class="text-dark font-weight-medium pt-4 mb-2">Phone Number</p>
+                                            <p th:text="${user.phoneNumber}"></p>
+                                            <p class="text-dark font-weight-medium pt-4 mb-2">Address</p>
+                                            <p th:text="${user.address}"></p>
+                                            <a class="btn btn-success" th:href="@{/clients/edit-profile/__${user.id}__}">Edit Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section Begin -->
+<footer th:replace="/client/index :: footer"></footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
+
+<!-- Js Plugins -->
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery.nicescroll.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/jquery.countdown.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/mixitup.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

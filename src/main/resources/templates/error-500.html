@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/error-500.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="full-screen">
+    <div class='container'>
+        <span class="error-num">5</span>
+        <div class='eye'></div>
+        <div class='eye'></div>
+
+        <p class="sub-text">Oh eyeballs! Something went wrong. We're <span class="italic">looking</span> to see what
+            happened.</p>
+        <p onclick="back()">Go back</p>
+    </div>
+</div>
+</body>
+<script>
+    function back() {
+        history.back();
+    }
+    $(".full-screen").mousemove(function (event) {
+        var eye = $(".eye");
+        var x = eye.offset().left + eye.width() / 2;
+        var y = eye.offset().top + eye.height() / 2;
+        var rad = Math.atan2(event.pageX - x, event.pageY - y);
+        var rot = rad * (180 / Math.PI) * -1 + 180;
+        eye.css({
+            "-webkit-transform": "rotate(" + rot + "deg)",
+            "-moz-transform": "rotate(" + rot + "deg)",
+            "-ms-transform": "rotate(" + rot + "deg)",
+            transform: "rotate(" + rot + "deg)"
+        });
+    });
+</script>
+</html>
